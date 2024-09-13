@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fast Armenia</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet">
+    <link href="{% static 'css/all.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'css/templatemo-style.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <!-- Top box -->
+        <div class="placeholder">
+            <div class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/simple-house-01.jpg' %}">
+                <div class="tm-header">
+                    <div class="row tm-header-inner">
+                        <div class="col-md-6 col-12">
+                            <img src="{% static 'img/simple-house-logo.png' %}" alt="Logo" class="tm-site-logo"> 
+                            <div class="tm-site-text-box">
+                                <h1 class="tm-site-title">Fast Armenia</h1>
+                                <h6 class="tm-site-description">Online Restaurant Shop in Armenia</h6> 
+                            </div>
+                        </div>
+                        <nav class="col-md-6 col-12 tm-nav">
+                            <ul class="tm-nav-ul">
+                                <li class="tm-nav-li"><a href="{% url 'main' %}" class="tm-nav-link active">Գլխավոր</a></li>
+                                <li class="tm-nav-li"><a href="{% url 'about' %}" class="tm-nav-link">Մեր մասին</a></li>
+                                <li class="tm-nav-li"><a href="{% url 'contact' %}" class="tm-nav-link">Կապ մեզ հետ</a></li>
+                            </ul>
+                        </nav>  
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <header class="row tm-welcome-section">
+                <h2 class="col-12 text-center tm-section-title">Մեր Թիմը</h2>
+                <p class="col-12 text-center">Մենք ունենք աշխատանքային լայն եվ ընկերական թիմ</p>
+            </header>
+            {% for person in persons %}
+            <div class="tm-container-inner tm-persons">
+                <div class="row">
+                    <article class="col-lg-6">
+                        <figure class="tm-person">
+                            <img src="{{ person.image.url }}" alt="Image" class="img-fluid tm-person-img" />
+                            <figcaption class="tm-person-description">
+                                <h4 class="tm-person-name">{{ person.name }}</h4>
+                                <p class="tm-person-title">{{ person.title }}</p>
+                                <p class="tm-person-about">{{ person.about }}</p>
+                                <div>
+                                    {% if person.facebook_link %}
+                                        <a href="{{ person.facebook_link }}" class="tm-social-link">
+                                            <i class="fab fa-facebook tm-social-icon"></i>
+                                        </a>
+                                    {% endif %}
+                                    {% if person.twitter_link %}
+                                        <a href="{{ person.twitter_link }}" class="tm-social-link">
+                                            <i class="fab fa-twitter tm-social-icon"></i>
+                                        </a>
+                                    {% endif %}
+                                    {% if person.instagram_link %}
+                                        <a href="{{ person.instagram_link }}" class="tm-social-link">
+                                            <i class="fab fa-instagram tm-social-icon"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </article>
+                </div>
+            </div>
+            {% endfor %}
+            
+		</main>
+
+		<footer class="tm-footer text-center">
+            <p>This project created by Vigen Kocharyan! 
+            | Design: Վերցվել Է օնլայն կայքերից!</a></p>
+        </footer>
+	</div>
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/parallax.min.js' %}"></script>
+</body>
+</html>

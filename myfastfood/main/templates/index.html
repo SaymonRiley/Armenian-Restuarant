@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fast Armenia</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet">
+    <link href="{% static 'css/templatemo-style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Top box -->
+        <div class="placeholder">
+            <div class="parallax-window" data-parallax="scroll" data-image-src="{% static 'img/simple-house-01.jpg' %}">
+                <div class="tm-header">
+                    <div class="row tm-header-inner">
+                        <div class="col-md-6 col-12">
+                            <img src="{% static 'img/simple-house-logo.png' %}" alt="Logo" class="tm-site-logo"> 
+                            <div class="tm-site-text-box">
+                                <h1 class="tm-site-title">Fast Armenia</h1>
+                                <h6 class="tm-site-description">Online Restaurant Shop in Armenia</h6> 
+                            </div>
+                        </div>
+                        <nav class="col-md-6 col-12 tm-nav">
+                            <ul class="tm-nav-ul">
+                                <li class="tm-nav-li"><a href="{% url 'main' %}" class="tm-nav-link active">Գլխավոր</a></li>
+                                <li class="tm-nav-li"><a href="{% url 'about' %}" class="tm-nav-link">Մեր մասին</a></li>
+                                <li class="tm-nav-li"><a href="{% url 'contact' %}" class="tm-nav-link">Կապ մեզ հետ</a></li>
+                            </ul>
+                        </nav>  
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <header class="row tm-welcome-section">
+                <h2 class="col-12 text-center tm-section-title">Բարի գալուստ Fast Armenia ռեստորան</h2>
+                <p class="col-12 text-center">Հայկական, Վրացական և այլ երկրների ազգային և ավանդական ուտեստներ, ինչպես նաև Fast Food!</p>
+            </header>
+            
+            <!-- Category navigation -->
+            <div class="tm-paging-links">
+                <nav>
+                    <ul>
+                        {% for category in categories %}
+                            <li class="tm-paging-item">
+                                <a href="#tm-gallery-page-{{ category.id }}" class="tm-paging-link{% if forloop.first %} active{% endif %}">
+                                    {{ category.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Product gallery -->
+            <div class="tm-gallery">
+                {% for category in categories %}
+                    <div id="tm-gallery-page-{{ category.id }}" class="tm-gallery-page {% if not forloop.first %}hidden{% endif %}">
+                        {% for item in category.items.all %}
+                            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                                <figure>
+                                    <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid tm-gallery-img">
+                                    <figcaption>
+                                        <h4 class="tm-gallery-title">{{ item.title }}</h4>
+                                        <p class="tm-gallery-description">{{ item.description }}</p>
+                                        <p class="tm-gallery-price">
+                                            {% if item.price_small %}{{ item.price_small }}Դ{% endif %}
+                                            {% if item.price_large %} / {{ item.price_large }}Դ{% endif %}
+                                        </p>
+                                    </figcaption>
+                                </figure>
+                            </article>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </main>
+
+        <footer class="tm-footer text-center">
+            <p>This project created by Vigen Kocharyan! 
+            | Design: Վերցվել Է օնլայն կայքերից!</a></p>
+        </footer>
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/parallax.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $('.tm-paging-link').click(function(e){
+                e.preventDefault();
+                
+                var page = $(this).attr('href');
+                $('.tm-gallery-page').addClass('hidden');
+                $(page).removeClass('hidden');
+                $('.tm-paging-link').removeClass('active');
+                $(this).addClass("active");
+            });
+        });
+    </script>
+</body>
+</html>
